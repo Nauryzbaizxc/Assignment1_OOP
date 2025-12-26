@@ -1,49 +1,47 @@
 import model.Employee;
+import model.Human;
 import model.Student;
-
-import java.util.Scanner;
+import model.interfaces.IStudyable;
+import model.interfaces.IWorkable;
 
 public class Main {
-
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
-
-        // input data
-        System.out.print("Enter name: ");
-        String name = scanner.nextLine();
-
-        System.out.print("Enter age: ");
-        int age = scanner.nextInt();
-
-        System.out.print("Is active (true/false): ");
-        boolean active = scanner.nextBoolean();
-
-        // create objects
+        // Reference as class
         Employee employee = new Employee(
-                name, age, active,
-                "Developer", 3000.0f
+                "Alex", 30, true,
+                "Developer", 4000f
         );
 
-        Student student = new Student(
+        // Reference as superclass
+        Human studentHuman = new Student(
                 "Anna", 19, true,
-                "Computer Science", 3.7f
+                "Computer Science", 3.8f
         );
 
-        // use setters and getters
-        employee.setSalary(3500.0f);
-        System.out.println(employee.getSalary());
+        // Reference as interface
+        IStudyable studyableStudent = new Student(
+                "Bob", 20, true,
+                "Math", 3.5f
+        );
 
-        student.setGpa(3.9f);
-        System.out.println(student.getGpa());
+        IWorkable workableEmployee = employee;
 
-        // use methods
         employee.introduce();
         employee.dailyActivity();
         employee.work();
+        employee.getSalaryInfo();
+        employee.study();
+        employee.exam();
 
-        student.introduce();
-        student.dailyActivity();
-        student.study();
+        System.out.println();
+
+        studentHuman.introduce();
+        studentHuman.dailyActivity();
+
+        studyableStudent.study();
+        studyableStudent.exam();
+
+        ((Student) studentHuman).showUniversity();
     }
 }

@@ -1,9 +1,13 @@
 package model;
 
-public class Student extends Human {
+import model.interfaces.IStudyable;
+
+public final class Student extends Human implements IStudyable {
 
     private String major;
     private float gpa;
+
+    public final String university = "ABC University";
 
     public Student(String name, int age, boolean active,
                    String major, float gpa) {
@@ -12,29 +16,22 @@ public class Student extends Human {
         this.gpa = gpa;
     }
 
-    // getters and setters
-    public String getMajor() {
-        return major;
-    }
-
-    public void setMajor(String major) {
-        this.major = major;
-    }
-
-    public float getGpa() {
-        return gpa;
-    }
-
-    public void setGpa(float gpa) {
-        this.gpa = gpa;
+    @Override
+    public void dailyActivity() {
+        System.out.println("Student is studying daily.");
     }
 
     @Override
-    public void dailyActivity() {
-        System.out.println("Student is studying.");
+    public void study() {
+        System.out.println("Student studies " + major);
     }
 
-    public void study() {
-        System.out.println("Studies " + major);
+    @Override
+    public void exam() {
+        System.out.println("Student passes exams.");
+    }
+
+    public final void showUniversity() {
+        System.out.println("University: " + university);
     }
 }

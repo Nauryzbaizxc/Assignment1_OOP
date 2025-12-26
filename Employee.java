@@ -1,12 +1,12 @@
 package model;
 
-public class Employee extends Human {
+import model.interfaces.IStudyable;
+import model.interfaces.IWorkable;
+
+public class Employee extends Human implements IWorkable, IStudyable {
 
     private String position;
     private float salary;
-
-    // static field
-    public static String companyName = "TechCompany";
 
     public Employee(String name, int age, boolean active,
                     String position, float salary) {
@@ -15,28 +15,28 @@ public class Employee extends Human {
         this.salary = salary;
     }
 
-    public String getPosition() {
-        return position;
-    }
-
-    public void setPosition(String position) {
-        this.position = position;
-    }
-
-    public float getSalary() {
-        return salary;
-    }
-
-    public void setSalary(float salary) {
-        this.salary = salary;
+    @Override
+    public void dailyActivity() {
+        System.out.println("Employee is working daily.");
     }
 
     @Override
-    public void dailyActivity() {
-        System.out.println("Employee is working.");
+    public void work() {
+        System.out.println("Employee works as " + position);
     }
 
-    public void work() {
-        System.out.println("Works as " + position + " in " + companyName);
+    @Override
+    public void getSalaryInfo() {
+        System.out.println("Salary: " + salary);
+    }
+
+    @Override
+    public void study() {
+        System.out.println("Employee studies for professional growth.");
+    }
+
+    @Override
+    public void exam() {
+        System.out.println("Employee passes certification exam.");
     }
 }
